@@ -19,14 +19,12 @@ ARG configuration=production
 
 RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
-# FROM nginx:1.19.3-alpine
+FROM nginx:1.19.3-alpine
 
-# COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html 
+COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html
 
-# EXPOSE 80
+EXPOSE 82
 
-# COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
+ADD ./nginx-custom.conf /etc/nginx/conf.d/default.conf
 
 
