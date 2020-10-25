@@ -1,0 +1,118 @@
+<div *ngIf="loader">
+    <div class="overlay">
+        <div class="spinner-wrapper">
+            <app-loader></app-loader>
+
+        </div>
+    </div>
+</div>
+<div class="dialog-div">
+    <div class="row">
+        <div class="container-fluid header-div">
+            <div>
+                <span class="title-css">{{data.action}} Data</span>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <form [formGroup]="itemDetailsForm" class="material-form" [class.blurred]="!loader">
+
+            <div class="row">
+                <div class="col-md-4 form-group">
+
+                    <mat-form-field class="material-full-width">
+                        <mat-label>City<span style="color: red;">*</span></mat-label>
+                        <input formControlName="city" pattern="^[a-zA-Z0-9 ]*$" matInput>
+                    </mat-form-field>
+                    <div *ngIf="itemDetailsForm.controls.city.errors && itemDetailsForm.controls.city.touched"
+                        class="text-danger">
+                        <div *ngIf="itemDetailsForm.controls.city.errors.required" class="errormsg">
+                            Required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 form-group">
+
+                    <mat-form-field class="material-full-width">
+                        <mat-label>Price<span style="color: red;" *ngIf="data.action =='Add'">*</span></mat-label>
+                        <input formControlName="price"  matInput>
+                    </mat-form-field>
+                    <div *ngIf="itemDetailsForm.controls.price.errors && itemDetailsForm.controls.price.touched"
+                        class="text-danger">
+                        <div *ngIf="itemDetailsForm.controls.price.errors.required" class="errormsg">
+                            Required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 form-group">
+                    <mat-form-field class="material-full-width">
+                        <mat-label>Status<span style="color: red;">*</span></mat-label>
+                        <input formControlName="status" 
+                            matInput>
+                    </mat-form-field>
+                    <div *ngIf="itemDetailsForm.controls.status.errors && itemDetailsForm.controls.status.touched"
+                        class="text-danger">
+                        <div *ngIf="itemDetailsForm.controls.status.errors.required" class="errormsg">
+                            Required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 form-group">
+                    <mat-form-field class="material-full-width">
+                        <mat-label>Color<span style="color: red;" *ngIf="data.action =='Add'">*</span></mat-label>
+                        <input formControlName="color" matInput>
+                    </mat-form-field>
+                    <div *ngIf="itemDetailsForm.controls.color.errors && itemDetailsForm.controls.color.touched"
+                        class="text-danger">
+                        <div *ngIf="itemDetailsForm.controls.color.errors.required" class="errormsg">
+                            Required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 form-group">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker1" placeholder="Start Date" formControlName="start_date">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                      </mat-form-field>
+                </div>
+                <div class="col-md-4 form-group">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker1" placeholder="End Date" formControlName="end_date">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                      </mat-form-field>
+                </div>
+            </div>
+
+
+
+            <input type="hidden" autofocus="autofocus" />
+            <!-- <div class="err-msg" *ngIf="errorMsg">
+                {{errorMsg}}
+            </div> -->
+        </form>
+
+        <div class="btn-div">
+            <div class="col-md-2 offset-md-8 form-group">
+                <button *ngIf="data.action == 'Add'"
+                    [attr.disabled]="itemDetailsForm.invalid? true: null"
+                    class="btn btn-primary action-btn" (click)="saveData();">Save
+                </button>
+                <button *ngIf="data.action == 'View/Edit'"
+                    [attr.disabled]="itemDetailsForm.invalid? true: null"
+                    class="btn btn-primary action-btn" (click)="updateData();">Update
+                </button>
+            </div>
+            <div class="col-md-2 form-group"><button (click)="close()"
+                    class="btn btn-primary action-btn cls-css">Cancel</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>

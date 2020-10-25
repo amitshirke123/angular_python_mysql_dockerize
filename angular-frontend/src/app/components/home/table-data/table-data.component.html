@@ -1,0 +1,80 @@
+<div *ngIf="loader">
+    <div class="overlay">
+        <div class="spinner-wrapper">
+            <app-loader></app-loader>
+
+        </div>
+    </div>
+</div>
+
+<!-- <div class="col-md-6 form-group">
+    <ng-select [items]="products" bindLabel="name" [clearable]="true" (clear)="onClear()" [(ngModel)]="product_name" [searchable]="true" (change)="getValue()">
+    </ng-select> 
+  </div> -->
+
+<div class="col-md-2 offset-md-10 form-group">
+    <button (click)="openAddEditModal('Add', '')" class="btn btn-primary action-btn">Add
+        Data</button>
+</div>
+
+<div class="col-xs-12 col-md-12" [class.blured]="loader" style="padding-bottom: 2.5rem">
+
+    <div class="table-responsive">
+        <table [dataSource]="dataSource" mat-table matSort style="border: 1px solid lightgray">
+            <ng-container matColumnDef="id">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header>ID</th>
+                <td *matCellDef="let element" mat-cell> {{element?.id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="city">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> City</th>
+                <td *matCellDef="let element" mat-cell>{{element?.city}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="start_date">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header>Start Date</th>
+                <td *matCellDef="let element" mat-cell> {{element?.start_date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="end_date">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header>End Date</th>
+                <td *matCellDef="let element" mat-cell> {{element?.start_date}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> Price</th>
+                <td *matCellDef="let element" mat-cell>{{element?.price}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> Status</th>
+                <td *matCellDef="let element" mat-cell>{{element?.status}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="color">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> Color</th>
+                <td *matCellDef="let element" mat-cell>{{element?.color}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th *matHeaderCellDef mat-header-cell>Action</th>
+                <td *matCellDef="let element" mat-cell>
+                    <span class="material-icons" (click)="openAddEditModal('View/Edit', element)" title="Edit"
+                        style="color:blue;cursor: pointer;">
+                        edit
+                    </span>&nbsp;
+                    <span class="material-icons" (click)="deleteData(element)" title="Delete"
+                        style="color: #DC143C;cursor: pointer;">
+                        delete
+                    </span>
+                </td>
+            </ng-container>
+
+            <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+            <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        </table>
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5"></mat-paginator>
+        <!-- <p *ngIf="noUserData" style="color: red; text-align:center">No Records Found.</p> -->
+    </div>
+
+</div>
